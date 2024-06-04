@@ -39,12 +39,12 @@ const WhiteBoard = () => {
     socket.emit('join-room', { roomToken: data.token })
     setIsPending(false)
     if (data.diagramBase64URL) {
-      const canvas = canvasRef.current
-      const ctx = canvas?.getContext('2d')
-      if (!ctx || !canvas) return
       const image = new Image()
       image.src = data.diagramBase64URL
       image.onload = () => {
+        const canvas = canvasRef.current
+        const ctx = canvas?.getContext('2d')
+        if (!ctx || !canvas) return
         // Get the aspect ratio of the image
         const aspectRatio = image.width / image.height
 
