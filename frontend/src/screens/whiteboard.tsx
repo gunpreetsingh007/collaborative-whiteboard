@@ -127,12 +127,12 @@ const WhiteBoard = () => {
                   type='text'
                   value={roomId}
                   disabled
-                  className='p-2 rounded-md border border-black mr-1 md:mr-3 bg-white w-[60%] md:w-[32%]'
+                  className='p-2 rounded-md border border-black mr-1 md:mr-3 bg-white w-3/5 md:w-1/3'
                 />
                 <CopyToClipboard text={roomId}>
                   <button
                     type='button'
-                    className='rounded-md text-sm font-medium bg-blue-500 py-2 px-4 text-white active:bg-blue-600 mr-2 w-[35%] md:w-[12%]'>
+                    className='rounded-md text-sm font-medium bg-blue-500 py-2 px-4 text-white active:bg-blue-600 mr-2 w-1/3 md:w-[35%] lg:w-[10%]'>
                     Copy Room ID
                   </button>
                 </CopyToClipboard>
@@ -143,7 +143,7 @@ const WhiteBoard = () => {
               </div>
             </div>
           </div>
-          <div className={showColorPicker ? 'absolute right-32 top-48 md:right-60 md:top-28' : 'hidden'}>
+          <div className={showColorPicker ? 'absolute right-32 top-48 lg:right-60 lg:top-28 md:top-28' : 'hidden'}>
             <div className='relative flex flex-col'>
               <ChromePicker className='mt-4 left-4' color={color} onChange={(e) => setColor(e.hex)} />
             </div>
