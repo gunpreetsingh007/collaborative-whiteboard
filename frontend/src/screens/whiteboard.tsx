@@ -20,7 +20,7 @@ const WhiteBoard = () => {
   const params = useParams()
   const [roomId] = useState(params.roomId as string)
   const [color, setColor] = useState<string>('#000')
-  const { canvasRef, onMouseDown } = useDraw(createLine)
+  const { canvasRef, startDrawing, stopDrawing } = useDraw(createLine)
   const [isPending, setIsPending] = useState(true)
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [isDiagramSaving, setIsDiagramSaving] = useState(false)
@@ -121,36 +121,39 @@ const WhiteBoard = () => {
       ) : (
         <>
           <div className='toolbar absolute top-8 left-[10%] flex justify-center w-4/5'>
-            <div className='flex flex-col md:flex-row justify-between w-full rounded-md shadow-lg bg-white p-2'>
-              <div className='flex ml-5 flex-row'>
+            <div className='flex flex-col md:flex-row justify-between w-full rounded-md shadow-lg bg-white p-3'>
+              <div className='flex mt-4 md:mt-2 ml-2 md:ml-5 w-full flex-row mr-2'>
                 <input
                   type='text'
                   value={roomId}
                   disabled
-                  className='p-2 rounded-md border border-black mr-3 bg-white'
+                  className='p-2 rounded-md border border-black mr-1 md:mr-3 bg-white w-[60%] md:w-[32%]'
                 />
                 <CopyToClipboard text={roomId}>
                   <button
                     type='button'
-                    className='rounded-md text-sm font-medium bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 mr-2'>
+                    className='rounded-md text-sm font-medium bg-blue-500 py-2 px-4 text-white active:bg-blue-600 mr-2 w-[35%] md:w-[12%]'>
                     Copy Room ID
                   </button>
                 </CopyToClipboard>
               </div>
-              <div className='flex mr-5 pt-3 md:pt-0 justify-center ml-6'>
+              <div className='flex mr-5 pt-3 md:pt-0 md:mt-2 justify-center ml-6'>
                 <button onClick={() => setShowColorPicker(!showColorPicker)} className='rounded-md text-sm font-medium bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 mr-2'>{showColorPicker ? "Close ColorPicker" : "Open ColorPicker"}</button>
                 <button onClick={saveDiagram} className='rounded-md text-sm font-medium bg-green-500 py-2 px-4 text-white hover:bg-green-600'><span className={isDiagramSaving ? 'fas fa-spinner fa-pulse' : ''}>{!isDiagramSaving ? "Save Diagram" : ""}</span></button>
               </div>
             </div>
           </div>
-          <div className={showColorPicker ? 'absolute right-32 top-40 md:right-60 md:top-24' : 'hidden'}>
+          <div className={showColorPicker ? 'absolute right-32 top-48 md:right-60 md:top-28' : 'hidden'}>
             <div className='relative flex flex-col'>
               <ChromePicker className='mt-4 left-4' color={color} onChange={(e) => setColor(e.hex)} />
             </div>
           </div>
           <canvas
             ref={canvasRef}
-            onMouseDown={onMouseDown}
+            onMouseDown={startDrawing}
+            onMouseUp={stopDrawing}
+            onTouchStart={startDrawing}
+            onTouchEnd={stopDrawing}
             width={window.innerWidth}
             height={window.innerHeight}
           />
