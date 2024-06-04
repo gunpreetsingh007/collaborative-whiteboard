@@ -15,6 +15,7 @@ const init = async () => {
     const app = express();
     const server = http.createServer(app);
     const io = new Server(server, {
+        path: "/socket",
         cors: {
             origin: process.env.FRONTEND_URL!
         },

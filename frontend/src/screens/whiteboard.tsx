@@ -7,7 +7,7 @@ import Loader from '../components/loader'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-const socket = io(import.meta.env.VITE_APP_BACKEND_SOCKET_URL)
+const socket = io(import.meta.env.VITE_APP_BACKEND_SOCKET_URL, { path: '/socket' })
 
 type DrawLineProps = {
   prevPoint: Point | null
