@@ -1,0 +1,19 @@
+/* This injects Tailwind's base styles and any base styles registered by plugins. */
+@tailwind base;
+
+/* This injects Tailwind's component classes and any component classes registered by plugins. */
+@tailwind components;
+
+/* This injects Tailwind's utility classes and any utility classes registered by plugins. */
+@tailwind utilities;
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
